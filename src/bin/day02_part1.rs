@@ -13,29 +13,27 @@ fn main() {
     let games = input.split('\n');
 
     let result = games
-        .map(|game| {
+        .filter_map(|game| {
             let possible = game.split(';').all(|r| {
                 colors.iter().all(|(&max, re)| {
-                    let instances = match re.captures(r) {
-                        Some(c) => c.get(1).unwrap().as_str().parse::<i32>().unwrap(),
-                        _ => 0,
-                    };
-
-                    instances <= max
+                    re.captures(r)
+                        .and_then(|c| c.get(1))
+                        .and_then(|c| c.as_str().parse::<i32>().ok())
+                        .unwrap_or(0)
+                        <= max
                 })
             });
 
             if possible {
-                game_re
-                    .captures(game)
-                    .unwrap()
-                    .get(1)
-                    .unwrap()
-                    .as_str()
-                    .parse::<i32>()
-                    .unwrap()
+                Some(
+                    game_re
+                        .captures(game)
+                        .and_then(|c| c.get(1))
+                        .and_then(|c| c.as_str().parse::<i32>().ok())
+                        .unwrap(),
+                )
             } else {
-                0
+                None
             }
         })
         .sum::<i32>();

@@ -13,17 +13,18 @@ fn main() {
     let result = games
         .map(|game| {
             let reveals = game.split(';');
+
             color_res
                 .iter()
                 .map(move |color_re| {
                     reveals
                         .clone()
                         .map(|reveal| {
-                            if let Some(captures) = color_re.captures(reveal) {
-                                captures.get(1).unwrap().as_str().parse::<i32>().unwrap()
-                            } else {
-                                0
-                            }
+                            color_re
+                                .captures(reveal)
+                                .and_then(|c| c.get(1))
+                                .and_then(|c| c.as_str().parse::<i32>().ok())
+                                .unwrap_or(0)
                         })
                         .max()
                         .unwrap()

@@ -21,6 +21,6 @@ result = lines.map do |line|
   last_number = line.match(LAST_REGEX).captures.last
   ((NUMBERS[first_number] || first_number) + (NUMBERS[last_number] || last_number)).to_i
 end
-.reduce(&:+)
+.reduce(:+)
 
 p result

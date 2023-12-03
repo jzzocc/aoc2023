@@ -6,6 +6,6 @@ result = lines.map do |line|
   nums = line.gsub(/\D/, '')
   (nums[0] + nums[-1]).to_i
 end
-.reduce(&:+)
+.reduce(:+)
 
 p result
