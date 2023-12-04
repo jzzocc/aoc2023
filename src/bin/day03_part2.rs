@@ -24,7 +24,7 @@ fn main() {
 
         for (n, n_range) in &nums {
             for gear in &gears {
-                if n_range.clone().any(|r| gear.contains(&r)) {
+                if gear.contains(&n_range.start) || gear.contains(&(n_range.end - 1)) {
                     numbers_per_gear
                         .entry(format!("{}|{:?}", line_index, gear))
                         .or_default()
@@ -34,7 +34,7 @@ fn main() {
 
             if line_index > 0 {
                 for gear in &gears_per_line[line_index - 1] {
-                    if n_range.clone().any(|r| gear.contains(&r)) {
+                    if gear.contains(&n_range.start) || gear.contains(&(n_range.end - 1)) {
                         numbers_per_gear
                             .entry(format!("{}|{:?}", line_index - 1, gear))
                             .or_default()
@@ -47,7 +47,7 @@ fn main() {
         if line_index > 0 {
             for (n, n_range) in &numbers_per_line[line_index - 1] {
                 for gear in &gears {
-                    if n_range.clone().any(|r| gear.contains(&r)) {
+                    if gear.contains(&n_range.start) || gear.contains(&(n_range.end - 1)) {
                         numbers_per_gear
                             .entry(format!("{}|{:?}", line_index, gear))
                             .or_default()
