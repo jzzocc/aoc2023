@@ -5,7 +5,7 @@ COLORS = {
   /(\d+) green/ => 13,
   /(\d+) blue/ => 14
 }.freeze
-GAME_RE = /Game (\d+):/.freeze
+GAME_RE = /Game (\d+):/
 
 games = File.read('input/day02.txt').split("\n")
 

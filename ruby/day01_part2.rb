@@ -11,8 +11,8 @@ NUMBERS = {
   'eight' => '8',
   'nine' => '9'
 }.freeze
-FIRST_REGEX = /(#{NUMBERS.keys.join('|')}|\d)/.freeze
-LAST_REGEX = /.*#{FIRST_REGEX}/.freeze
+FIRST_REGEX = /(#{NUMBERS.keys.join('|')}|\d)/
+LAST_REGEX = /.*#{FIRST_REGEX}/
 
 lines = File.read('input/day01.txt').split("\n")
 
